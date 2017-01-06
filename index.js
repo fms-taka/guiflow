@@ -1,9 +1,9 @@
+'use strict';
+
 var fs = require("fs");
 var electron = require('electron');
-var app = electron.app;
-var BrowserWindow = electron.BrowserWindow;
-var Menu = electron.Menu;
-var dialog = electron.dialog;
+const {app, BrowserWindow, Menu, dialog} = electron;
+
 app.on('window-all-closed', function () {
   app.quit();
 });

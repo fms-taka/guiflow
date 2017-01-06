@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require("fs");
 var uiflow = require("uiflow");
 var flumine = require("flumine");
