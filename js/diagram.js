@@ -55,7 +55,7 @@ const refresh = function (data) {
   DEFAULT_VIEW_BOX = getViewBox(svg);
   if (VIEW_BOX_VALUES)
     setViewBox(svg, VIEW_BOX_VALUES);
-  let startX, startY;
+  let startX, startY, movingX, movingY;
   let initialViewBox;
   let onDrag = false;
 
@@ -95,9 +95,9 @@ const refresh = function (data) {
     if (onDrag) {
       movingX = evt.clientX;
       movingY = evt.clientY;
-      var diffX = movingX - startX;
-      var diffY = movingY - startY;
-      var viewBoxValues = getViewBox(svg);
+      const diffX = movingX - startX;
+      const diffY = movingY - startY;
+      const viewBoxValues = getViewBox(svg);
       viewBoxValues[0] = initialViewBox[0] - diffX * SCALE;
       viewBoxValues[1] = initialViewBox[1] - diffY * SCALE;
       setViewBox(svg, viewBoxValues);
