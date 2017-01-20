@@ -1,9 +1,9 @@
 'use strict';
 
-var fs = require("fs");
-var uiflow = require("uiflow");
-var flumine = require("flumine");
-var through2 = require("through2");
+const fs = require("fs");
+const uiflow = require("uiflow");
+const flumine = require("flumine");
+const through2 = require("through2");
 
 var api = module.exports = {};
 
