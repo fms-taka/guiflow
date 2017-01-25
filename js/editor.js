@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = require("./jquery-2.1.4.min");
+const $ = require('jquery');
 const fs = require("fs");
 const EventEmitter = require('events');
 const flumine = require("flumine");

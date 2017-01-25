@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/hirokidaichi/guiflow",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "dialogs": "^1.1.12",
     "electron-debug": "^0.5.2",
     "electron-windows-installer": "^1.2.5",
     "flumine": "^0.1.8",
+    "jquery": "^3.1.1",
     "sprintf": "^0.1.5",
     "through2": "^2.0.1",
-    "uiflow": "^1.1.1"
+    "uiflow": "^1.1.8"
   },
   "devDependencies": {
     "ace-min-noconflict": "^1.1.9",

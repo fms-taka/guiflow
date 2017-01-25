@@ -3,21 +3,21 @@
 //process.env.NODE_PATH = "./";
 if (process.platform == "win32") {
   //modulePaths.push();
-  var p = process.resourcesPath; //+ "\\app";
+  const p = process.resourcesPath; //+ "\\app";
   console.log(p);
   module.paths.unshift(p + "\\app");
   module.paths.unshift(p + "\\app.asar");
   module.paths.unshift(p + "\\app\\node_modules");
   module.paths.unshift(p + "\\app.asar\\node_modules");
 }
-var resolvePath = function (p) {
+const resolvePath = function (p) {
   if (process.platform == "win32") {
     return p.replace(/^\.\//, '');
   } else {
     return p;
   }
 };
-var nodeModule = function () {
+const nodeModule = function () {
   if (process.platform == "win32") {
     return "node_modules/" + p;
   } else {
@@ -27,12 +27,12 @@ var nodeModule = function () {
 
 const {app, ipcRenderer, remote, clipboard, nativeImage} = require("electron");
 const {Menu} = remote;
-var fs = require("fs");
-var flumine = require("flumine");
-var $ = require(resolvePath("./js/jquery-2.1.4.min"));
-var uiflow = remote.require("./app/uiflow");
-var editor = require(resolvePath("./js/editor"));
-var diagram = require(resolvePath("./js/diagram"));
+const fs = require("fs");
+const flumine = require("flumine");
+const $ = require('jquery');
+const uiflow = remote.require("./app/uiflow");
+const editor = require(resolvePath("./js/editor"));
+const diagram = require(resolvePath("./js/diagram"));
 
 [
   "open",

@@ -1,10 +1,10 @@
-var gulp = require('gulp');
-var zip = require("gulp-zip");
-var runseq = require("run-sequence");
-var packager = require("electron-packager");
+const gulp = require('gulp');
+const zip = require("gulp-zip");
+const runseq = require("run-sequence");
+const packager = require("electron-packager");
 
-var electronVersion = "0.36.12";
-var del = require('del');
+const electronVersion = "1.5.0";
+const del = require('del');
 gulp.task('clean', function (done) {
   return del(['package'], function () {
     done();

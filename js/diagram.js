@@ -1,4 +1,4 @@
-const $ = require("./jquery-2.1.4.min");
+const $ = require('jquery');
 const EventEmitter = require("events");
 const sprintf = require("sprintf");
 const emitter = new EventEmitter();

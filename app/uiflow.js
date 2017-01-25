@@ -7,53 +7,33 @@ const through2 = require("through2");
 
 var api = module.exports = {};
 
-api.update = function (inputFileName, code, format) {
-  var f = flumine(function (d, ok, ng) {
-
-    var buff = [];
-    var output = through2(function (chunk, enc, cb) {
-      var svg = chunk;
-      buff.push(svg);
+api.update = (inputFileName, code, format) => {
+  const f = flumine((d, ok, ng) => {
+    const buff = [];
+    const output = through2((chunk, enc, cb) => {
+      buff.push(chunk);
       cb();
-
     });
-    var stream = uiflow.buildWithCode(
-      inputFileName, code, format, function (error) {
-        ng(error);
-      });
+    const stream = uiflow.buildWithCode(inputFileName, code, format, (error) => ng(error));
     stream.pipe(output);
-    stream.on("end", function () {
-      var buffAll = Buffer.concat(buff);
-      ok(buffAll);
+    stream.on("end", () => {
+      ok(Buffer.concat(buff));
       output.end();
     });
-
-
   });
   return f();
 };
 
-var stringify = function (buff) {
-  var str = String(buff);
-  return str;
-};
+const stringify = (buff) => String(buff);
 
-var base64nize = function (buff) {
-  return buff.toString("base64");
-};
-api.compile = function (code) {
-  return flumine.set({
-    svg: flumine.to(function (d) {
-      return api.update("<anon>", code, "svg");
-    }).to(stringify),
-    meta: flumine.to(function (d) {
-      return api.update("<anon>", code, "meta");
-    }).to(stringify)
+const base64nize = (buff) => buff.toString("base64");
+
+api.compile = (code) =>
+  flumine.set({
+    svg: flumine.to((d) => api.update("<anon>", code, "svg")).to(stringify),
+    meta: flumine.to((d) => api.update("<anon>", code, "meta")).to(stringify)
   })();
-};
 
-api.base64png = function (code) {
-  return flumine.to(function () {
-    return api.update("<anon>", code, "png");
-  }).to(base64nize)();
-};
+api.base64png = (code) =>
+  flumine.to(() => api.update("<anon>", code, "png")).to(base64nize)();
+
