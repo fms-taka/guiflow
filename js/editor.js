@@ -1,18 +1,18 @@
 'use strict';
 
-var $ = require("./jquery-2.1.4.min");
-var fs = require("fs");
-var EventEmitter = require('events');
-var flumine = require("flumine");
+const $ = require("./jquery-2.1.4.min");
+const fs = require("fs");
+const EventEmitter = require('events');
+const flumine = require("flumine");
 const {dialog, clipboard} = require('electron');
 require('ace-min-noconflict');
 require('ace-min-noconflict/theme-monokai');
 
-var editor;
-var EDITOR_FILE_NAME;
-var EDITOR_FILE_VALUE;
+let editor;
+let EDITOR_FILE_NAME;
+let EDITOR_FILE_VALUE;
 
-var emitter = new EventEmitter();
+const emitter = new EventEmitter();
 
 $(window).on("load", function () {
   editor = ace.edit("text");
@@ -40,11 +40,11 @@ $(window).on("load", function () {
 
 });
 
-var waitEditorReady = flumine(function (d, ok, ng) {
+const waitEditorReady = flumine(function (d, ok, ng) {
   if (editor) {
     ok(d);
   } else {
-    var id = setInterval(function () {
+    const id = setInterval(function () {
       if (editor) {
         clearInterval(id);
         ok(d);
@@ -53,7 +53,7 @@ var waitEditorReady = flumine(function (d, ok, ng) {
   }
 });
 
-var getFileName = function (forceDialog) {
+const getFileName = function (forceDialog) {
   return flumine(function (d, ok, ng) {
     if (!forceDialog && EDITOR_FILE_NAME) {
       return ok(EDITOR_FILE_NAME);
@@ -73,9 +73,9 @@ var getFileName = function (forceDialog) {
       });
     }
   });
-}
+};
 
-var saveFile = flumine(function (d, ok, ng) {
+const saveFile = flumine(function (d, ok, ng) {
   if (!d) {
     return ok("canceled");
   }
@@ -90,11 +90,11 @@ var saveFile = flumine(function (d, ok, ng) {
 
 });
 
-var copy = waitEditorReady.and(function () {
+const copy = waitEditorReady.and(function () {
   var text = editor.getCopyText();
   clipboard.writeText(text);
 });
-var app = module.exports = {
+const app = module.exports = {
   open: waitEditorReady.and(function (d, ok, ng) {
     var fileName = d[1];
     EDITOR_FILE_NAME = fileName;
